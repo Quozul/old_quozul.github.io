@@ -15,6 +15,7 @@ ul#menu {
 ul#menu li {
     float: left;
     padding: 10px 15px;
+    transition: 0.2s;
 }
 
 ul#menu li a {
@@ -24,6 +25,12 @@ ul#menu li a {
     text-decoration: none;
     transition: 0.2s;
 }
+
+ul#menu li:hover {
+    background-color: #444;
+}
+
+/* ------------------- */
 
 * {
     margin: 0;
