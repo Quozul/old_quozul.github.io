@@ -75,4 +75,14 @@ h1{
     height: 256px;
 }
     
-a { text-decoration: none; color: #003 }
+a { text-decoration: none; color: #003; }
+
+a.show {
+    text-decoration: none;
+    color: #2E86C1;
+    font-weight: bold;
+    border-bottom: solid 1px rgba(0,0,0,0);
+    transition: 0.2s;
+}
+
+a.show:hover { border-bottom: solid 1px #2E86C1 }
