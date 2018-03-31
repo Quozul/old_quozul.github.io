@@ -1,0 +1,78 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+
+/* Menu */
+
+ul#menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    user-select: none;
+    border-bottom: solid 2px #777; 
+}
+
+ul#menu li {
+    float: left;
+    padding: 10px 15px;
+}
+
+ul#menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #334;
+    color: #FFF;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 30px;
+    
+    overflow-y: scroll;
+}
+
+/* Custom scroll-bar */
+#style-1::-webkit-scrollbar { width: 12px; background-color: rgba(0,0,0,0) }
+#style-1::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #499bea 0%,#207ce5 100%) }
+#style-1::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); background-color: #333 }
+    
+h1{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+    
+.page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+    
+.page ul {
+    list-style-type: none;
+    background-color: #efefef;
+    border-radius: 6px;
+    font-size: 12px;
+    border: solid 1px #555;
+    color: black;
+    width: 256px;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    height: 256px;
+}
+    
+a { text-decoration: none; color: #003 }
