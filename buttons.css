@@ -1,39 +1,14 @@
-.button {
-    margin: 10px;
-    margin-bottom: 20px;
+.button { margin: 10px;
     border-radius: 4px;
     font-size: 24px;
     padding: 10px;
     cursor: pointer;
-    transition: 0.2s
-}
+    box-shadow: 0 10px currentColor;
+    transition: 0.2s }
+.button:active { box-shadow: 0 5px currentColor }
 
-                    /* COOOLORS! */
-
-/* Green */
-.green { background-color: #27AE60; box-shadow: 0 10px 0 #1E8449 }
-.green:active { box-shadow: 0 5px 0 #1E8449 }
-
-/* Yellow */
-.yellow { background-color: #D4AC0D; box-shadow: 0 10px 0 #B7950B }
-.yellow:active { box-shadow: 0 5px 0 #B7950B }
-
-/* Red */
-.red { background-color: #A93226; box-shadow: 0 10px 0 #7B241C }
-.red:active { box-shadow: 0 5px 0 #7B241C }
-
-/* Blue */
-.blue { background-color: #884EA0; box-shadow: 0 10px 0 #633974 }
-.blue:active { box-shadow: 0 5px 0 #633974; }
-
-/* Purple */
-.purple { background-color: #6C3483; box-shadow: 0 10px 0 #5B2C6F }
-.purple:active { box-shadow: 0 5px 0 #5B2C6F }
-
-/* Gray */
-.gray { background-color: #909497; box-shadow: 0 10px 0 #626567 }
-.gray:active { box-shadow: 0 5px 0 #626567 }
-
-/* Light blue */
-.light_blue { background-color: #AED6F1; box-shadow: 0 10px 0 #3498DB }
-.light_blue:active { box-shadow: 0 5px 0 #3498DB }
+.green { background-color: #27AE60; color: #1E8449 }
+.yellow { background-color: #D4AC0D; color: #B7950B }
+.red { background-color: #A93226; color: #7B241C }
+.blue { background-color: #884EA0; color: #633974 }
+.purple { background-color: #6C3483; color: #5B2C6F }
