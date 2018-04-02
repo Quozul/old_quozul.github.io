@@ -60,6 +60,9 @@ h1{
     text-align: center;
     margin-top: 5%;
     margin-bottom: 10%;
+    margin: 5% auto 10% auto;
+    border-bottom: solid 1px white;
+    width: 50%;
 }
     
 .page {
@@ -81,9 +84,10 @@ h1{
     padding: 10px;
     margin: 20px;
     height: 256px;
+    transition: 0.5s;
 }
-    
-a { text-decoration: none; color: #003; }
+
+.page ul:hover { width: 512px }
 
 a.show {
     text-decoration: none;
@@ -93,4 +97,5 @@ a.show {
     transition: 0.2s;
 }
 
+a { text-decoration: none; color: #003 }
 a.show:hover { border-bottom: solid 1px #2E86C1 }
