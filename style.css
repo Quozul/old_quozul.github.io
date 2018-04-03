@@ -1,11 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 
 * { margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-rendering: optimizeLegibility;
-    font-family: "Roboto", sans-serif;
-    text-align: center; }
+    font-family: "Quicksand", sans-serif;
+    text-align: center }
 
 body { background-color: #334;
     color: #FFF;
