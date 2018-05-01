@@ -4,14 +4,17 @@
     font-family: "Quicksand", sans-serif;
     text-align: center }
 
+b { font-weight: bold } /* For some reasons, the b tag isn't working on Firefox */
+
 body { background-color: #334;
     color: #FFF;
     line-height: 30px;
     user-select: none;
+	-moz-user-select: none;
     font-weight: 100;
     overflow-y: scroll }
     
-h1 { margin: 5% auto 10% auto;
+h1 { margin: 5% auto 5% auto;
     border-bottom: solid 1px white;
     width: 50% }
 
@@ -19,16 +22,19 @@ ul { list-style-type: none }
         /* Menu */
 ul#menu { overflow: hidden;
     background-color: #333;
-    border-bottom: solid 2px #777 }
+    border-bottom: solid 2px #777;
+    height: 48px;
+    position: sticky }
 
 ul#menu li { float: left;
     padding: 10px 15px;
+	min-width: 48px;
     transition: 0.2s }
 
 ul#menu li a { color: white }
 
 ul#menu li:hover { background-color: #444 }
-        /* Scrollbar */
+        /* Scrollbar-not working on Firefox */
 body::-webkit-scrollbar { width: 12px; background-color: rgba(0,0,0,0) }
 body::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #499bea 0%,#207ce5 100%) }
 body::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); background-color: #333 }
@@ -48,6 +54,9 @@ body::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3
     height: 256px;
     box-shadow: 0 5px #D0D3D4;
     transition: 0.5s }
+	
+.page ul.big { width: 1024px;
+    height: 512px }
         /* Links */
 a.show { color: #2E86C1;
     font-weight: bold;
@@ -56,3 +65,10 @@ a.show { color: #2E86C1;
 
 a { text-decoration: none; color: #003 }
 a.show:hover { border-bottom: solid 1px #2E86C1 }
+
+        /* Style all font awesome icons */
+a.fab { padding: 0px;
+    font-size: 30px;
+    height: 48px;
+    text-align: center;
+    text-decoration: none }
