@@ -3,47 +3,53 @@
 * { margin: 0;
     font-family: "Quicksand", sans-serif;
     text-align: center }
-
-b { font-weight: bold } /* For some reasons, the b tag isn't working on Firefox */
-
 body { background-color: #334;
     color: #FFF;
     line-height: 30px;
     user-select: none;
-	-moz-user-select: none;
-    font-weight: 100;
+    -moz-user-select: none;
     overflow-y: scroll }
+
+b { font-weight: bold }
+p { text-indent: 2em }
     
-h1 { margin: 5% auto 5% auto;
+h1 { margin: 100px auto 100px auto;
     border-bottom: solid 1px white;
     width: 50% }
 
+a.show { color: #2E86C1;
+    font-weight: bold;
+    border-bottom: solid 1px rgba(0, 0, 0, 0);
+    transition: 0.2s }
+
+a { text-decoration: none; color: #003 }
+a.show:hover { border-bottom: solid 1px #2E86C1 }
+
 ul { list-style-type: none }
-        /* Menu */
 ul#menu { overflow: hidden;
     background-color: #333;
     border-bottom: solid 2px #777;
-    height: 48px;
-    position: sticky }
-
+    height: 48px }
 ul#menu li { float: left;
     padding: 10px 15px;
-	min-width: 48px;
     transition: 0.2s }
-
 ul#menu li a { color: white }
-
 ul#menu li:hover { background-color: #444 }
-        /* Scrollbar-not working on Firefox */
+
 body::-webkit-scrollbar { width: 12px; background-color: rgba(0,0,0,0) }
 body::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #499bea 0%,#207ce5 100%) }
 body::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); background-color: #333 }
-        /* Download boxes */
+
 .page { display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center }
-    
+    justify-content: center }
+.page-show { width: 90%;
+    padding: 25px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: #FDFEFE;
+    box-shadow: 0 5px #D0D3D4;
+    color: black }
 .page ul { background-color: #FDFEFE;
     border-radius: 6px;
     font-size: 12px;
@@ -52,23 +58,21 @@ body::-webkit-scrollbar-track { -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3
     padding: 10px;
     margin: 20px;
     height: 256px;
-    box-shadow: 0 5px #D0D3D4;
-    transition: 0.5s }
-	
-.page ul.big { width: 1024px;
-    height: 512px }
-        /* Links */
-a.show { color: #2E86C1;
-    font-weight: bold;
-    border-bottom: solid 1px rgba(0,0,0,0);
+    box-shadow: 0 5px #D0D3D4 }
+
+.button { margin: 10px;
+	color: #d7dbdd;
+	background-color: #e5e7e9;
+    border-radius: 4px;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 10px currentColor;
     transition: 0.2s }
+.button:active { box-shadow: 0 5px currentColor }
 
-a { text-decoration: none; color: #003 }
-a.show:hover { border-bottom: solid 1px #2E86C1 }
-
-        /* Style all font awesome icons */
-a.fab { padding: 0px;
-    font-size: 30px;
-    height: 48px;
-    text-align: center;
-    text-decoration: none }
+.green { background-color: #27AE60; color: #1E8449 }
+.yellow { background-color: #D4AC0D; color: #B7950B }
+.red { background-color: #A93226; color: #7B241C }
+.blue { background-color: #884EA0; color: #633974 }
+.purple { background-color: #6C3483; color: #5B2C6F }
