@@ -1,0 +1,25 @@
+title: Pirikium
+email: quozul@outlook.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Top-down shooter game in 2D made with löve frameword made by Quozul
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: Quozul
+github_username:  Quozul
+discord:
+    name: Pirikium
+    url: https://discord.gg/UZy8rCY
+    id: 472820911955902465
+
+# Build settings
+markdown: kramdown
+
+# Authors
+authors:
+    quozul:
+        name: Erwan
+        display_name: Quôzul
+        avatar: assets/authors/quozul.png
+        email: quozul@outlook.com
+        twitter: Quozul
+        github: Quozul
