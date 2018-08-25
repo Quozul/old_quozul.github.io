@@ -29,49 +29,55 @@
         </nav>
         {%- endif -%}
     </div>
+    
 </header>
 
 <!-- Home heading -->
-{%- if layout.downloads -%} {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+{%- if layout.downloads -%}
+{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
 <div class="home-heading">
+    
     <div class="wrapper">
         {%- for post in site.posts limit:1 -%}
         <div class="news-col">
             <p>
-            <h1>Latest post:</h1>
-            {%- if post.title -%}
-            <a class="post-link" href="{{ post.url | relative_url }}">
-                <h2>{{ post.title }}</h2>
-            </a>
-            {%- endif -%} {%- if post.image -%}
-            <img src="post.image" /> {%- endif -%}
+                <h1>Latest post:</h1>
+                {%- if post.title -%}
+                    <a class="post-link" href="{{ post.url | relative_url }}">
+                        <h2>{{ post.title }}</h2>
+                    </a>
+                {%- endif -%}
             </p>
-    </div>
-    <div class="news-col">
-        <p>
-            <span class="post-meta">
-                {{ post.date | date: date_format }}
-            </span>
-            {{ post.excerpt }}
+        </div>
+        <div class="news-col">
+            <p>
+                <span class="post-meta">
+                    {{ post.date | date: date_format }}
+                </span>
+                {{ post.excerpt | truncate: 150 }}
 
-            <a class="button read-more" href="{{ post.url | relative_url }}">READ MORE</a>
-        </p>
-    </div>
+                <div><a class="button read-more" href="{{ post.url | relative_url }}">READ MORE</a></div>
+            </p>
+        </div>
     {%- endfor -%}
+    </div>
+
+    <div class="downloads">
+        <h2>Downloads:</h2>
+
+        <a href="https://github.com/quozul/Pirikium" class="github-link">GitHub</a>
+        
+        <ul>
+            <li><a class="button green">Windows</a></li>
+            <li><a href="http://localhost:4000/requirements/">Minimum requirements</a></li>
+        </ul>
+
+        <ul>
+            <li><a href="https://github.com/quozul/Pirikium" class="button purple">GitHub</a></li>
+            <li><a href="https://github.com/quozul/Pirikium/wiki">Wiki</a></li>
+        </ul>
+    </div>
+
 </div>
 
-<div class="downloads">
-    <ul>
-        <li><a class="button green">Windows</a></li>
-        <li><a href="http://localhost:4000/requirements/">Minimum requirements</a></li>
-    </ul>
-
-    <ul>
-        <li><a href="https://github.com/quozul/Pirikium" class="button purple">GitHub</a></li>
-        <li><a href="https://github.com/quozul/Pirikium/wiki">Wiki</a></li>
-    </ul>
-
-    <a href="https://github.com/quozul/Pirikium" class="github-link">GitHub</a>
-</div>
-</div>
 {%- endif -%}

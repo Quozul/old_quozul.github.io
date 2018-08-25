@@ -2,10 +2,12 @@
 layout: post
 title:  "New website!"
 date:   2018-08-24 18:40 +0200
+edited: 2018-08-25 09:55 +0200
 categories: website
 author: "Quozul"
 ---
-The new website has just been released, the new version is using [Jekyll](https://jekyllrb.com/). Let's take a tour!  
+The new website has just been released, the new version is using [Jekyll](https://jekyllrb.com/). Let's take a tour!
+
 The usage of Jekyll on the website let us write posts to get you up-to-date.
 
 ### Front page
@@ -17,8 +19,8 @@ If you scroll down a bit, you'll start to see all the posts and some usefull lin
 <img src="/assets/posts/2018-08-24/bottom-front-page.png"/>
 
 ### A post
-There're nothing really special on this page, however you can see who written the post and the date.  
-(Uw, making a screenshot of someting I'm writing is quite a pain...)
+There're nothing really special on this page, however you can see who written the post, the date of creation and if the post was edited, the edition date.  
+(Making a screenshot of someting I'm currently writing is quite a pain...)
 <img src="/assets/posts/2018-08-24/post.png"/>
 
 ### Other projects
@@ -33,5 +35,5 @@ You can access both __About__ and __Other projects__ page with the menu at the t
 
 #### Phones
 And of course, the website works on phones!  
-(Yes that's an iPod but it works like a phone...)
+(Yes that's an iPod but it work like a phone...)  
 <img src="/assets/posts/2018-08-24/phone.png" width="50%"/>
