@@ -314,57 +314,52 @@
     &:hover {
         border-bottom: solid 0;
     }
-}
 
-.green {
-    background-color: #27AE60;
-    color: #1E8449;
-}
+    &.green {
+        background-color: #27AE60;
+        color: #1E8449;
+    }
 
-.yellow {
-    background-color: #D4AC0D;
-    color: #B7950B;
-}
+    &.yellow {
+        background-color: #D4AC0D;
+        color: #B7950B;
+    }
 
-.red {
-    background-color: #A93226;
-    color: #7B241C;
-}
+    &.red {
+        background-color: #A93226;
+        color: #7B241C;
+    }
 
-.blue {
-    background-color: #884EA0;
-    color: #633974;
-}
+    &.blue {
+        background-color: #884EA0;
+        color: #633974;
+    }
 
-.purple {
-    background-color: #6C3483;
-    color: #5B2C6F;
-}
+    &.purple {
+        background-color: #6C3483;
+        color: #5B2C6F;
+    }
 
-.read-more {
-    background-color: #FDFEFE;
-    font-size: 18px;
-    padding: 10px;
-    box-shadow: 0 5px #D0D3D4;
+    &.read-more {
+        background-color: #FDFEFE;
+        font-size: 18px;
+        padding: 10px;
+        box-shadow: 0 5px #D0D3D4;
 
-    &:active {
-        box-shadow: 0 1px #D0D3D4;
+        &:active {
+            box-shadow: 0 1px #D0D3D4;
+        }
     }
 }
 
 .home-heading {
     display: block;
     text-align: center;
-    height: 400px;
+    height: 450px;
     margin: 0 0 100px 0;
     border-bottom: solid 2px #777;
     background-color: #333;
     padding: 20px;
-
-    .wrapper .news-col .post-link:hover {
-        border-radius: 4px 0;
-        background-color: #444;
-    }
 
     @include media-query($on-palm) {
         margin: 0 0 10px 0;
@@ -375,6 +370,8 @@
         float: left;
         width: 50%;
         height: 300px;
+        max-height: 300px;
+        overflow: hidden;
 
         p {
             padding: 25px;
@@ -383,15 +380,25 @@
         @include media-query($on-palm) {
             width: 100%;
             height: 250px;
+            
             p {
                 padding: 5px;
             }
+        }
+
+        .post-link:hover {
+            border-radius: 4px 0;
+            background-color: #444;
         }
     }
 
     .downloads {
         display: inline-block;
         height: 100px;
+        
+        h2 {
+            border-bottom: solid 2px #777;
+        }
 
         ul {
             list-style: none;
@@ -416,7 +423,7 @@
         }
 
         @include media-query($on-palm) {
-            ul {
+            h2, ul {
                 display: none;
             }
 

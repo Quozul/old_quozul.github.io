@@ -6,13 +6,19 @@ layout: default
     <header class="post-header">
         <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
         <p class="post-meta">
+            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
                 {{ page.date | date: date_format }}
             </time>
+            
+            {%- if page.edited -%}
+                <i title="{{ page.edited | date: date_format }}" style="font-size: 10px;">(edited) </i>
+            {%- endif -%}
+            
             {%- if page.author -%}
                 • <span>{{ page.author }}</span>
-            {%- endif -%}</p>
+            {%- endif -%}
+        </p>
     </header>
 
     <div class="post-content e-content" itemprop="articleBody">
