@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 ### What's Pirikium?
-Pirikium is a top-down shooter, choose a class with the default weapons and skills you like, gain experience by kill enemies and spend your experience into skills levels. The higher your skills are, the higher your global level is and the harder the enemies will be... and more will come to kill you!
-Your levels are savec as well as your high score so you can try to beat it later!
+Pirikium is a top-down shooter, choose a class with the default weapons and skills you like, gain experience by kill enemies and spend your experience into skills levels. The higher your skills are, the higher your global level is and the harder the enemies will be... and more will come to kill you!  
+Your levels are saved as well as your high score so you can try to beat it later!
 
 Pirikium is written in Lua with the [Löve 2D framework](https://love2d.org/).
 
