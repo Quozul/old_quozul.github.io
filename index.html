@@ -1,174 +1,195 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset='utf-8'>
-    <title>Guess the color game</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-</head>
+    <head>
+        <meta charset='utf-8'>
+        <title>Guess the color game</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    </head>
 
-<body>
-    <header>
-        <nav>
-            <ul id="menu">
-                <li><a href="index.html">Guess the color</a></li>
-                <li class="right"><a href="about.html">About</a></li>
-            </ul>
-        </nav>
-    </header>
+    <body>
 
-    <main class="wrapper">
-        <h1 id="guess">Guess the color</h1>
-        <div id="info">
-            <nobr>
-                <span id="color-code">
-                    rgb(<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)
-                </span>
-            </nobr>
-            <nobr>
-                <span id="diff-span">
-                    Difficulty: <span id="difficulty">0</span>
-                </span>
-            </nobr>
-        </div>
+        <header>
+            <nav>
+                <ul id="menu">
+                    <li><a href="index.html">Guess the color</a></li>
+                    <li class="right"><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <div id="colors">
-            <span class="color-circle" id="1">&nbsp;</span>
-            <span class="color-circle" id="2">&nbsp;</span>
-            <span class="color-circle" id="3">&nbsp;</span>
-            <span class="color-circle" id="4">&nbsp;</span>
-            <span class="color-circle" id="5">&nbsp;</span>
-        </div>
-    </main>
+        <main class="wrapper">
+            <h1 id="guess">Guess the color</h1>
+            <div id="info">
+                <nobr>
+                    <span id="color-code">
+                        rgb(<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)
+                    </span>
+                </nobr>
+                <nobr>
+                    <span id="diff-span">
+                        Difficulty: <span id="difficulty">0</span>
+                    </span>
+                    <br>
+                    <span>
+                        Win rate: <span id="win-rate">0</span>%
+                    </span>
+                </nobr>
+            </div>
 
-    <footer>
-        <copyleft></copyleft> Copyleft
-    </footer>
+            <div id="colors">
+                <span class="color-circle" id="1">&nbsp;</span>
+                <span class="color-circle" id="2">&nbsp;</span>
+                <span class="color-circle" id="3">&nbsp;</span>
+                <span class="color-circle" id="4">&nbsp;</span>
+                <span class="color-circle" id="5">&nbsp;</span>
+            </div>
+        </main>
 
-    <script>
-        let color;
-        let dif = 255;
-        let guess_timer;
-        let win_timer;
-        let g_anim;
-        let won = false;
+        <footer>
+            <copyleft></copyleft> Copyleft
+        </footer>
 
-        const win_sound = new Audio('win.mp3');
-        const wrong_sound = new Audio('wrong.mp3');
-        const circles = document.getElementsByClassName('color-circle');
+        <script>
+            let color;
+            let dif = 255;
+            let guess_timer;
+            let win_timer;
+            let g_anim;
+            let won = false;
+            let clicks = 0;
+            let wins = 0;
 
-        function d(b, h) {
-            return Math.min(Math.max(b + Math.random() * h - h / 2, 0), 255);
-        }
+            const win_sound = new Audio('win.mp3');
+            const wrong_sound = new Audio('wrong.mp3');
+            const circles = document.getElementsByClassName('color-circle');
 
-        function e(a, b) {
-            for (var i = 0; i < a.length; i++)
-                if (a[i] != b[i])
-                    return false;
-            return true;
-        }
+            function d(b, h) {
+                return Math.min(Math.max(b + Math.random() * h - h / 2, 0), 255);
+            }
 
-        function randomColor() {
-            color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
-            let circle = Math.floor(Math.random() * 5);
+            function e(a, b) {
+                for (var i = 0; i < a.length; i++)
+                    if (a[i] != b[i])
+                        return false;
+                return true;
+            }
 
-            for (index in circles)
-                if (circles.hasOwnProperty(index)) {
-                    const element = circles[index];
+            function randomColor() {
+                color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() *
+                    255)];
+                let circle = Math.floor(Math.random() * 5);
 
-                    if (index == circle)
-                        element.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-                    else {
-                        let new_color;
-                        do {
-                            new_color = [d(color[0], dif), d(color[1], dif), d(color[2], dif)];
+                for (index in circles)
+                    if (circles.hasOwnProperty(index)) {
+                        const element = circles[index];
 
-                            element.style.backgroundColor = `rgb(${new_color[0]}, ${new_color[1]}, ${new_color[2]})`;
-                            // element.style.backgroundColor = `rgb(0, 0, 0)`;
-                        } while (e(new_color, color));
+                        if (index == circle)
+                            element.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+                        else {
+                            let new_color;
+                            do {
+                                new_color = [d(color[0], dif), d(color[1], dif), d(color[2], dif)];
+
+                                element.style.backgroundColor =
+                                    `rgb(${new_color[0]}, ${new_color[1]}, ${new_color[2]})`;
+                                // element.style.backgroundColor = `rgb(0, 0, 0)`;
+                            } while (e(new_color, color));
+                        }
                     }
+
+                document.getElementById('color-code').innerHTML =
+                    `rgb(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
+            }
+
+            function verifyColor() {
+                if (won) return
+
+                clicks++;
+
+                const g = document.getElementById('guess');
+                if (e(this.style.backgroundColor.slice(4, -1).split(', '), color)) {
+                    g.innerHTML = 'Well done!';
+
+                    anim1();
+                    win_sound.play();
+
+                    won = true;
+                    wins++;
+
+                    if (win_timer != undefined) clearTimeout(win_timer);
+
+                    // wait 1s till the animation ends and randomize colors
+                    win_timer = setTimeout(function () {
+                        dif = Math.max(dif - 1, 8);
+                        randomColor();
+                        document.getElementById('difficulty').innerHTML = 255 - dif;
+                        won = false;
+                    }, 1000);
+
+                } else {
+                    anim2();
+                    wrong_sound.play();
+                    g.innerHTML = 'Try again...';
                 }
 
-            document.getElementById('color-code').innerHTML = `rgb(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
-        }
+                document.getElementById('win-rate').innerHTML = (wins / clicks).toFixed(2) * 100;
 
-        function verifyColor() {
-            if (won) return
-
-            const g = document.getElementById('guess');
-            if (e(this.style.backgroundColor.slice(4, -1).split(', '), color)) {
-                g.innerHTML = 'Well done!';
-
-                anim1();
-                win_sound.play();
-                won = true;
-                if (win_timer != undefined) clearTimeout(win_timer);
-                win_timer = setTimeout(function () {
-                    dif = Math.max(dif - 1, 8);
-                    randomColor();
-                    document.getElementById('difficulty').innerHTML = 255 - dif;
-                    won = false;
+                // resets text after 1s
+                if (guess_timer != undefined) clearTimeout(guess_timer);
+                guess_timer = setTimeout(function () {
+                    g.innerHTML = 'Guess the color';
                 }, 1000);
-
-            } else {
-                anim2();
-                wrong_sound.play();
-                g.innerHTML = 'Try again...';
             }
 
-            if (guess_timer != undefined) clearTimeout(guess_timer);
-            guess_timer = setTimeout(function () {
-                g.innerHTML = 'Guess the color';
-            }, 1000);
-        }
-
-        function logColors() {
-            for (index in circles)
-                if (circles.hasOwnProperty(index))
-                    console.log(parseInt(index) + 1, circles[index].style.backgroundColor);
-        }
-
-        function logAnswer() {
-            for (index in circles)
-                if (circles.hasOwnProperty(index))
-                    if (e(circles[index].style.backgroundColor.slice(4, -1).split(', '), color))
-                        console.log(parseInt(index) + 1);
-        }
-
-        document.body.onload = randomColor;
-        document.getElementById('difficulty').innerHTML = 255 - dif;
-        for (index in circles)
-            if (circles.hasOwnProperty(index)) {
-                const element = circles[index];
-
-                element.onclick = verifyColor;
+            function logColors() {
+                for (index in circles)
+                    if (circles.hasOwnProperty(index))
+                        console.log(parseInt(index) + 1, circles[index].style.backgroundColor);
             }
 
-        function anim2() {
-            if (g_anim != undefined)
-                clearTimeout(g_anim);
+            function logAnswer() {
+                for (index in circles)
+                    if (circles.hasOwnProperty(index))
+                        if (e(circles[index].style.backgroundColor.slice(4, -1).split(', '), color))
+                            console.log(parseInt(index) + 1);
+            }
 
-            document.getElementById('guess').style.transform = 'scale(1.1)';
-            g_anim = setTimeout(function () {
-                document.getElementById('guess').style.transform = 'scale(1)';
-            }, 1000);
-        }
-
-        function anim1() {
+            document.body.onload = randomColor;
+            document.getElementById('difficulty').innerHTML = 255 - dif;
             for (index in circles)
                 if (circles.hasOwnProperty(index)) {
                     const element = circles[index];
-                    setTimeout(function () {
-                        element.style.borderRadius = '16px';
-                        setTimeout(function () {
-                            element.style.borderRadius = '';
-                        }, 200);
-                    }, index * 200);
+
+                    element.onclick = verifyColor;
                 }
 
-            anim2();
-        }
-    </script>
-</body>
+            function anim2() {
+                if (g_anim != undefined)
+                    clearTimeout(g_anim);
+
+                document.getElementById('guess').style.transform = 'scale(1.1)';
+                g_anim = setTimeout(function () {
+                    document.getElementById('guess').style.transform = '';
+                }, 1000);
+            }
+
+            function anim1() {
+                for (index in circles)
+                    if (circles.hasOwnProperty(index)) {
+                        const element = circles[index];
+                        setTimeout(function () {
+                            element.style.borderRadius = '16px';
+                            setTimeout(function () {
+                                element.style.borderRadius = '';
+                            }, 200);
+                        }, index * 200);
+                    }
+
+                anim2();
+            }
+        </script>
+    </body>
 
 </html>

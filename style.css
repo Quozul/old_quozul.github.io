@@ -22,25 +22,32 @@ body {
 
 .wrapper {
     display: block;
-    width: 60vw;
+    width: 100vw;
     margin: auto;
 }
 
-@media screen and (max-width: 300px) {
-    wrapper {
-        width: 100vw;
+@media screen and (min-width: 768px) {
+    .wrapper {
+        width: 60vw;
     }
 
-    #info>nobr {
+    section {
+        padding: 20px;
         margin: 0;
     }
 }
 
 section {
-    background-color: white;
-    border-radius: 5px;
+    background-color: #fdd;
     color: black;
-    padding: 20px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+
+p {
+    text-indent: 2em;
+    font-size: 18px;
 }
 
 /* Header */
@@ -121,6 +128,8 @@ footer {
     font-size: 18px;
     font-weight: normal;
     margin: 20px 0;
+
+    align-items: center;
 }
 
 #guess {
