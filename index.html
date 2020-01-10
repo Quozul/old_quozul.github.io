@@ -134,7 +134,7 @@
                     g.innerHTML = 'Try again...';
                 }
 
-                document.getElementById('win-rate').innerHTML = (wins / clicks).toFixed(2) * 100;
+                document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100);
 
                 // resets text after 1s
                 if (guess_timer != undefined) clearTimeout(guess_timer);
