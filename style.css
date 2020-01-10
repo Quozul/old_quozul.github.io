@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+/* Page stuff */
+
+* {
+    font-family: 'Quicksand';
+    text-align: center;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+    background-color: #111;
+    color: #eee;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wrapper {
+    display: block;
+    width: 60vw;
+    margin: auto;
+}
+
+@media screen and (max-width: 300px) {
+    wrapper {
+        width: 100vw;
+    }
+
+    #info>nobr {
+        margin: 0;
+    }
+}
+
+section {
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    padding: 20px;
+}
+
+/* Header */
+
+nav {
+    background-color: #222;
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu li a {
+    color: white;
+    display: inline-block;
+    padding: 20px;
+    text-decoration: none;
+}
+
+/* Footer */
+
+footer {
+    background-color: #222;
+    padding: 20px;
+}
+
+/* The game */
+
+#colors,
+#info {
+    display: flex;
+    justify-content: space-around;
+}
+
+#colors {
+    flex-wrap: wrap;
+}
+
+.color-circle {
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+    background-color: blue;
+    display: block;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.color-circle:hover {
+    border-radius: 16px;
+}
+
+.red {
+    color: rgb(255, 64, 64);
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: rgb(64, 64, 255);
+}
+
+#info,
+#guess {
+    text-align: center;
+    margin: auto;
+    padding: 0;
+}
+
+#info {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 20px 0;
+}
+
+#guess {
+    font-size: 28px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+/* Copyleft */
+
+copyleft {
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+copyleft::after {
+    content: "\00a9";
+}
