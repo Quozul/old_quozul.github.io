@@ -65,8 +65,14 @@
             const wrong_sound = new Audio('wrong.mp3');
             const circles = document.getElementsByClassName('color-circle');
 
+            const win_msg = ['Well done!', 'Good job!', 'So smart!'];
+            const encouraging = ['Don\'t give up.', 'Never give up.', 'You can do it.'];
+
             function d(b, h) {
-                return Math.min(Math.max(b + Math.random() * h - h / 2, 0), 255);
+                let c = Math.random() * (h / 2) + h / 2
+                if (Math.random() < .5)
+                    c = -c;
+                return Math.min(Math.max(b + c, 0), 255);
             }
 
             function e(a, b) {
@@ -77,8 +83,7 @@
             }
 
             function randomColor() {
-                color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() *
-                    255)];
+                color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
                 let circle = Math.floor(Math.random() * 5);
 
                 for (index in circles)
@@ -92,15 +97,13 @@
                             do {
                                 new_color = [d(color[0], dif), d(color[1], dif), d(color[2], dif)];
 
-                                element.style.backgroundColor =
-                                    `rgb(${new_color[0]}, ${new_color[1]}, ${new_color[2]})`;
+                                element.style.backgroundColor = `rgb(${new_color[0]}, ${new_color[1]}, ${new_color[2]})`;
                                 // element.style.backgroundColor = `rgb(0, 0, 0)`;
                             } while (e(new_color, color));
                         }
                     }
 
-                document.getElementById('color-code').innerHTML =
-                    `rgb(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
+                document.getElementById('color-code').innerHTML = `rgb(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
             }
 
             function verifyColor() {
@@ -110,7 +113,7 @@
 
                 const g = document.getElementById('guess');
                 if (e(this.style.backgroundColor.slice(4, -1).split(', '), color)) {
-                    g.innerHTML = 'Well done!';
+                    g.innerHTML = win_msg[Math.floor(Math.random() * win_msg.length)];
 
                     anim1();
                     win_sound.play();
@@ -131,7 +134,7 @@
                 } else {
                     anim2();
                     wrong_sound.play();
-                    g.innerHTML = 'Try again...';
+                    g.innerHTML = encouraging[Math.floor(Math.random() * encouraging.length)];
                 }
 
                 document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100);

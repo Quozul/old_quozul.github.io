@@ -35,6 +35,10 @@ body {
         padding: 20px;
         margin: 0;
     }
+
+    .color-circle:hover {
+        border-radius: 16px;
+    }
 }
 
 section {
@@ -100,7 +104,7 @@ footer {
     transition: .2s ease-in-out;
 }
 
-.color-circle:hover {
+.color-circle:active {
     border-radius: 16px;
 }
 
