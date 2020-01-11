@@ -53,6 +53,11 @@ p {
     font-size: 18px;
 }
 
+h6 {
+    font-weight: normal;
+    margin: 0;
+}
+
 /* Header */
 
 nav {
@@ -139,6 +144,11 @@ footer {
     font-size: 28px;
     font-weight: bold;
     transition: .2s;
+}
+
+#reset {
+    color: #777;
+    cursor: pointer;
 }
 
 /* Copyleft */

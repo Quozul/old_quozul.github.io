@@ -23,17 +23,19 @@
             <h1 id="guess">Guess the color</h1>
             <div id="info">
                 <nobr>
+                    rgb
                     <span id="color-code">
-                        rgb(<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)
+                        (<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)
                     </span>
                 </nobr>
                 <nobr>
                     <span id="diff-span">
                         Difficulty: <span id="difficulty">0</span>
                     </span>
+                    <span id="reset" title="Reset progress">↻</span>
                     <br>
                     <span>
-                        Win rate: <span id="win-rate">0</span>%
+                        Win rate: <span id="win-rate">??</span>%
                     </span>
                 </nobr>
             </div>
@@ -48,11 +50,14 @@
         </main>
 
         <footer>
-            <copyleft></copyleft> Copyleft
+            <copyleft></copyleft> Copyleft Erwan L.<br>
+            <h6><b>Note:</b> By playing the game you accept that a cookie is used to store your game data on your
+                device.</h6>
         </footer>
 
         <script>
             let color;
+            let colors;
             let dif = 255;
             let guess_timer;
             let win_timer;
@@ -64,27 +69,41 @@
             const win_sound = new Audio('win.mp3');
             const wrong_sound = new Audio('wrong.mp3');
             const circles = document.getElementsByClassName('color-circle');
+            const cookie_name = 'gtcgame';
 
             const win_msg = ['Well done!', 'Good job!', 'So smart!'];
             const encouraging = ['Don\'t give up.', 'Never give up.', 'You can do it.'];
 
-            function d(b, h) {
-                let c = Math.random() * (h / 2) + h / 2
-                if (Math.random() < .5)
-                    c = -c;
-                return Math.min(Math.max(b + c, 0), 255);
+            function rand(l = 0, u = 1) {
+                return Math.random() * u + l;
             }
 
-            function e(a, b) {
+            function d(base, dif) {
+                let min_dif = dif / 2;
+                let max_dif = dif;
+
+                let c = [];
+
+                base.forEach((v, i) => {
+                    let x = rand(-min_dif, max_dif);
+                    x = Math.floor(255 - x < 0 ? 255 + (255 - x) : x);
+
+                    c[i] = Math.min(Math.max(v + x, 0), 255);
+                });
+
+                return c;
+            }
+
+            function e(a, base) {
                 for (var i = 0; i < a.length; i++)
-                    if (a[i] != b[i])
+                    if (a[i] != base[i])
                         return false;
                 return true;
             }
 
             function randomColor() {
-                color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
-                let circle = Math.floor(Math.random() * 5);
+                color = [Math.floor(rand(0, 255)), Math.floor(rand(0, 255)), Math.floor(rand(0, 255))];
+                let circle = Math.floor(rand(0, 5));
 
                 for (index in circles)
                     if (circles.hasOwnProperty(index)) {
@@ -95,7 +114,7 @@
                         else {
                             let new_color;
                             do {
-                                new_color = [d(color[0], dif), d(color[1], dif), d(color[2], dif)];
+                                new_color = d(color, dif);
 
                                 element.style.backgroundColor = `rgb(${new_color[0]}, ${new_color[1]}, ${new_color[2]})`;
                                 // element.style.backgroundColor = `rgb(0, 0, 0)`;
@@ -103,7 +122,7 @@
                         }
                     }
 
-                document.getElementById('color-code').innerHTML = `rgb(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
+                document.getElementById('color-code').innerHTML = `(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
             }
 
             function verifyColor() {
@@ -113,7 +132,7 @@
 
                 const g = document.getElementById('guess');
                 if (e(this.style.backgroundColor.slice(4, -1).split(', '), color)) {
-                    g.innerHTML = win_msg[Math.floor(Math.random() * win_msg.length)];
+                    g.innerHTML = win_msg[Math.floor(rand(0, win_msg.length))];
 
                     anim1();
                     win_sound.play();
@@ -134,7 +153,7 @@
                 } else {
                     anim2();
                     wrong_sound.play();
-                    g.innerHTML = encouraging[Math.floor(Math.random() * encouraging.length)];
+                    g.innerHTML = encouraging[Math.floor(rand(0, encouraging.length))];
                 }
 
                 document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100);
@@ -144,6 +163,9 @@
                 guess_timer = setTimeout(function () {
                     g.innerHTML = 'Guess the color';
                 }, 1000);
+
+                document.cookie = `${cookie_name}=${JSON.stringify({ dif: dif, clicks: clicks, wins: wins })}`;
+                updateText();
             }
 
             function logColors() {
@@ -159,14 +181,19 @@
                             console.log(parseInt(index) + 1);
             }
 
+            // click on the circle to toggle verification
             document.body.onload = randomColor;
             document.getElementById('difficulty').innerHTML = 255 - dif;
             for (index in circles)
-                if (circles.hasOwnProperty(index)) {
-                    const element = circles[index];
+                if (circles.hasOwnProperty(index))
+                    circles[index].onclick = verifyColor;
 
-                    element.onclick = verifyColor;
-                }
+            // press a number between 1-5 to toggle verification
+            document.addEventListener('keydown', function (event) {
+                let circle = document.getElementById(event.key);
+                if (circle != undefined)
+                    verifyColor.call(circle);
+            });
 
             function anim2() {
                 if (g_anim != undefined)
@@ -192,6 +219,26 @@
 
                 anim2();
             }
+
+            document.getElementById('reset').onclick = function () {
+                document.cookie = `${cookie_name}=${JSON.stringify({ dif: 255, clicks: 0, wins: 0 })}`;
+                updateText();
+                randomColor();
+            }
+
+            function updateText() {
+                if (document.cookie == '') return;
+                // load cookie
+                let cookie = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)gtcgame\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+                wins = cookie.wins || 0;
+                clicks = cookie.clicks || 0;
+                dif = cookie.dif || 255;
+
+                document.getElementById('difficulty').innerHTML = 255 - dif;
+                document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100) || '??';
+            }
+
+            updateText();
         </script>
     </body>
 
