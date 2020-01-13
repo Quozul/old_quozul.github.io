@@ -190,9 +190,10 @@ function init() {
 
     // press a number between 1-5 to toggle verification
     document.addEventListener('keydown', function (event) {
+        if (event.repeat) return;
         let circle = document.getElementById(event.key);
         if (circle != undefined)
-            verify_color.call(circle);
+            circle.click();
     });
 
     update_gameinfo();
