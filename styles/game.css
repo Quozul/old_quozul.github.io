@@ -1,0 +1,68 @@
+#colors,
+#info {
+    display: flex;
+    justify-content: space-around;
+}
+
+#colors {
+    flex-wrap: wrap;
+}
+
+.color-circle {
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+    
+    border-radius: 32px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+    transition: .2s;
+}
+
+.color-circle:active {
+    border-radius: 16px;
+}
+
+@media screen and (min-width: 768px) {
+    .color-circle:hover {
+        border-radius: 16px;
+    }
+}
+
+.red {
+    color: rgb(255, 64, 64);
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: rgb(64, 64, 255);
+}
+
+#info,
+#guess {
+    text-align: center;
+    margin: auto;
+    padding: 0;
+}
+
+#info {
+    font-size: 18px;
+    margin: 20px 0;
+
+    align-items: center;
+    white-space: nowrap;
+}
+
+#guess {
+    font-size: 28px;
+    transition: .2s;
+}
+
+#reset {
+    color: #777;
+    cursor: pointer;
+}

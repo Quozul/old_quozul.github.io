@@ -6,6 +6,7 @@
         <title>Guess the color game</title>
         <meta name="description" content="Guess the color of the given color code!">
         <link href="styles/main.css" rel="stylesheet" type="text/css">
+        <link href="styles/game.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <script type="text/javascript" src="scripts/main.js"></script>
         <link rel="icon" type="image/png" href="icon.png">
@@ -25,13 +26,13 @@
         <main class="wrapper">
             <h1 id="guess">Guess the color</h1>
             <div id="info">
-                <nobr>
+                <span>
                     rgb
                     <span id="color-code">
                         (<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)
                     </span>
-                </nobr>
-                <nobr>
+                </span>
+                <span>
                     <span id="diff-span">
                         Difficulty: <span id="difficulty">0</span>
                     </span>
@@ -40,7 +41,7 @@
                     <span>
                         Win rate: <span id="win-rate">??</span>%
                     </span>
-                </nobr>
+                </span>
             </div>
 
             <noscript>
