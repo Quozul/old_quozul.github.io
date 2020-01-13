@@ -1,5 +1,4 @@
 let color;
-let colors;
 let dif = 255;
 let guess_timer;
 let win_timer;
@@ -63,7 +62,6 @@ function randomize_colors() {
                     new_color = random_color(color, dif);
 
                     element.style.backgroundColor = `rgb(${new_color[0]}, ${new_color[1]}, ${new_color[2]})`;
-                    // element.style.backgroundColor = `rgb(0, 0, 0)`;
                 } while (deep_compare(new_color, color));
             }
         }
@@ -88,7 +86,7 @@ function verify_color() {
 
         if (win_timer != undefined) clearTimeout(win_timer);
 
-        // wait 1s till the animation ends and randomize colors
+        // wait 1s until the animation ends and randomize colors
         dif = Math.max(dif - 1, 8);
         win_timer = setTimeout(function () {
             randomize_colors();
@@ -110,7 +108,7 @@ function verify_color() {
         g.innerHTML = 'Guess the color';
     }, 1000);
 
-    document.cookie = `${cookie_name}=${JSON.stringify({ dif: dif, clicks: clicks, wins: wins })}`;
+    update_cookie();
     update_gameinfo();
 }
 
@@ -158,6 +156,7 @@ function update_gameinfo() {
     if (document.cookie == '') return;
     // load cookie
     let cookie = JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)gtcgame\s*\=\s*([^;]*).*$)|^.*$/, '$1'));
+
     wins = cookie.wins || 0;
     clicks = cookie.clicks || 0;
     dif = cookie.dif || 255;
@@ -166,10 +165,18 @@ function update_gameinfo() {
     document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100) || '??';
 }
 
+function update_cookie() {
+    document.cookie = `${cookie_name}=${JSON.stringify({ dif: dif, clicks: clicks, wins: wins })}`;
+}
+
+// add event listeners
 function init() {
     // on reset
     document.getElementById('reset').onclick = function () {
-        document.cookie = `${cookie_name}=${JSON.stringify({ dif: 255, clicks: 0, wins: 0 })}`;
+        dif = 255;
+        clicks = 0;
+        wins = 0;
+        update_cookie();
         update_gameinfo();
         randomize_colors();
     }

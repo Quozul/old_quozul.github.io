@@ -12,8 +12,8 @@ body {
     margin: 0;
     box-sizing: border-box;
     min-height: 100vh;
-    background-color: #111;
-    color: #eee;
+    background-color: #eee;
+    color: #111;
 
     display: flex;
     flex-direction: column;
@@ -26,27 +26,15 @@ body {
     margin: auto;
 }
 
-@media screen and (min-width: 768px) {
-    .wrapper {
-        width: 60vw;
-    }
-
-    section {
-        padding: 20px;
-        margin: 0;
-    }
-
-    .color-circle:hover {
-        border-radius: 16px;
-    }
-}
-
 section {
+    margin: 5px;
+    padding: 5px;
+
     background-color: #fdd;
     color: black;
     border-radius: 5px;
-    margin: 5px;
-    padding: 5px;
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
 }
 
 p {
@@ -60,95 +48,38 @@ h6 {
 
 /* Header */
 
-nav {
-    background-color: #222;
-}
-
 #menu {
     display: flex;
     justify-content: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 5px;
+
+    background-color: #ddd;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
 }
 
 #menu li a {
-    color: white;
     display: inline-block;
-    padding: 20px;
+    padding: 15px;
+    color: black;
     text-decoration: none;
+    margin: 0 20px;
+    transition: .2s;
+}
+
+#menu li a:hover {
+    background-color: #eee;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .25);
+    border-radius: 5px;
 }
 
 /* Footer */
 
 footer {
-    background-color: #222;
+    background-color: #ddd;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
     padding: 20px;
-}
-
-/* The game */
-
-#colors,
-#info {
-    display: flex;
-    justify-content: space-around;
-}
-
-#colors {
-    flex-wrap: wrap;
-}
-
-.color-circle {
-    width: 64px;
-    height: 64px;
-    margin: 10px;
-    background-color: blue;
-    display: block;
-    border-radius: 32px;
-    cursor: pointer;
-    transition: .2s ease-in-out;
-}
-
-.color-circle:active {
-    border-radius: 16px;
-}
-
-.red {
-    color: rgb(255, 64, 64);
-}
-
-.green {
-    color: green;
-}
-
-.blue {
-    color: rgb(64, 64, 255);
-}
-
-#info,
-#guess {
-    text-align: center;
-    margin: auto;
-    padding: 0;
-}
-
-#info {
-    font-size: 18px;
-    font-weight: normal;
-    margin: 20px 0;
-
-    align-items: center;
-}
-
-#guess {
-    font-size: 28px;
-    font-weight: bold;
-    transition: .2s;
-}
-
-#reset {
-    color: #777;
-    cursor: pointer;
 }
 
 /* Copyleft */
@@ -160,4 +91,42 @@ copyleft {
 
 copyleft::after {
     content: "\00a9";
+}
+
+/* Media queries */
+
+/* For dark theme */
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #111;
+        color: #eee;
+    }
+
+    #menu {
+        background-color: #222;
+    }
+    
+    #menu li a {
+        color: white;
+    }
+
+    #menu li a:hover {
+        background-color: #262626;
+    }
+
+    footer {
+        background-color: #222;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        width: 60vw;
+    }
+
+    section {
+        padding: 20px;
+        margin: 0;
+    }
 }
