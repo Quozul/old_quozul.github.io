@@ -34,7 +34,7 @@ section {
     color: black;
     border-radius: 5px;
 
-    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 0 #ecc, 0 0 10px rgba(0, 0, 0, .5);
 }
 
 p {
@@ -84,12 +84,12 @@ footer {
 
 /* Copyleft */
 
-copyleft {
+.copyleft {
     display: inline-block;
     transform: rotate(180deg);
 }
 
-copyleft::after {
+.copyleft::after {
     content: "\00a9";
 }
 
