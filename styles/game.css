@@ -70,7 +70,9 @@
 
 #guess {
     font-size: 28px;
-    transition: .2s;
+    display: inline-block;
+    margin: 10px 0;
+    transition: .2s cubic-bezier(0.175, 0.885, 0.32, 2);
 }
 
 #reset {

@@ -82,6 +82,14 @@ footer {
     padding: 20px;
 }
 
+footer a {
+    color: rgb(0, 157, 255);
+}
+
+footer a:visited {
+    color: rgb(0, 157, 255);
+}
+
 /* Copyleft */
 
 .copyleft {
