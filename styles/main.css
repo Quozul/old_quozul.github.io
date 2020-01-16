@@ -27,7 +27,7 @@ body {
 }
 
 section {
-    margin: 5px;
+    margin: 20px 5px;
     padding: 5px;
 
     background-color: #fdd;
@@ -114,7 +114,7 @@ footer a:visited {
     #menu {
         background-color: #222;
     }
-    
+
     #menu li a {
         color: white;
     }
@@ -135,6 +135,6 @@ footer a:visited {
 
     section {
         padding: 20px;
-        margin: 0;
+        margin: 20px 0;
     }
 }
