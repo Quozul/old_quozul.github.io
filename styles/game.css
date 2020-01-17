@@ -89,3 +89,13 @@
 #reset:active {
     transform: rotate(360deg);
 }
+
+#last-color {
+    margin: 0;
+    font-weight: normal;
+    transition: .2s;
+}
+
+#copy-color {
+    cursor: pointer;
+}
