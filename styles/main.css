@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
-
 /* Page stuff */
 
 * {
-    font-family: 'Quicksand';
+    font-family: 'Quicksand', sans-serif;
     text-align: center;
     user-select: none;
 }
