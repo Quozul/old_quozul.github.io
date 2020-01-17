@@ -63,7 +63,7 @@ h6 {
     color: black;
     text-decoration: none;
     margin: 0 20px;
-    transition: .2s;
+    transition: background-color .2s, border-radius .2s, box-shadow .2s;
 }
 
 #menu li a:hover {

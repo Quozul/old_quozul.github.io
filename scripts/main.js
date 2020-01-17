@@ -6,6 +6,7 @@ let g_anim;
 let won = false;
 let clicks = 0;
 let wins = 0;
+let last_color;
 
 const win_sound = new Audio('assets/win.mp3');
 const wrong_sound = new Audio('assets/wrong.mp3');
@@ -88,17 +89,23 @@ function verify_color() {
         won = true;
         wins++;
 
-        let hex = rgbToHex(color[0], color[1], color[2]);
-        let n_match = ntc.name(hex);
+        // save last color hex code
+        last_color = rgbToHex(color[0], color[1], color[2]);
+        let n_match = ntc.name(last_color);
 
         let lc = document.getElementById('last-color');
+        lc.style.opacity = '0'; // create smooth transition
 
-        lc.style.opacity = '0';
+        // display last color name according to ntc library
         setTimeout(function () {
-            lc.style.opacity = '2';
-            lc.innerHTML = `<b>That was the color:</b> <span id="copy-color" title="Copy color code" onclick="copy_color_code();">${n_match[1]}</span>`;
+            lc.style.opacity = '1';
+            lc.innerHTML =
+                `<b>That was the color:</b>
+                <span id="copy-color" class="tooltip" title="Copy color code" onclick="copy_color_code();">
+                    ${n_match[1]}
+                    <span id="copied" class="tooltip-text">Copied!</span>
+                </span>`;
         }, 200);
-
 
         if (win_timer != undefined) clearTimeout(win_timer);
 
@@ -186,9 +193,11 @@ function update_cookie() {
 }
 
 function copy_color_code() {
-    let hex = rgbToHex(color[0], color[1], color[2]);
-    navigator.clipboard.writeText(hex).then(function () {
-        console.log('Color code copied to clipboard!');
+    navigator.clipboard.writeText(last_color).then(function () {
+        // display copied tooltip and hides it after 2s
+        let copied = document.getElementById('copied');
+        copied.style.opacity = 1;
+        const copied_timeout = setTimeout(function () { copied.style.opacity = 0; }, 2000);
     }, function (err) {
         console.error('Couldn\'t copy to clipboard: ', err);
     });
