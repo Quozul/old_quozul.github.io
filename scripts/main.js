@@ -21,6 +21,10 @@ function rand(l = 0, u = 1) {
     return Math.random() * u + l;
 }
 
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 // random color generator
 function random_color(base, dif) {
     let min_dif = dif / 2;
@@ -83,6 +87,18 @@ function verify_color() {
 
         won = true;
         wins++;
+
+        let hex = rgbToHex(color[0], color[1], color[2]);
+        let n_match = ntc.name(hex);
+
+        let lc = document.getElementById('last-color');
+
+        lc.style.opacity = '0';
+        setTimeout(function () {
+            lc.style.opacity = '2';
+            lc.innerHTML = `<b>That was the color:</b> <span id="copy-color" title="Copy color code" onclick="copy_color_code();">${n_match[1]}</span>`;
+        }, 200);
+
 
         if (win_timer != undefined) clearTimeout(win_timer);
 
@@ -167,6 +183,15 @@ function update_gameinfo() {
 
 function update_cookie() {
     document.cookie = `${cookie_name}=${JSON.stringify({ dif: dif, clicks: clicks, wins: wins })}`;
+}
+
+function copy_color_code() {
+    let hex = rgbToHex(color[0], color[1], color[2]);
+    navigator.clipboard.writeText(hex).then(function () {
+        console.log('Color code copied to clipboard!');
+    }, function (err) {
+        console.error('Couldn\'t copy to clipboard: ', err);
+    });
 }
 
 // add event listeners
