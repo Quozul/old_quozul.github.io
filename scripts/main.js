@@ -104,7 +104,7 @@ function verify_color() {
                 `<b>That was the color:</b>
                 
                 <span id="copy-color" class="tooltip" onclick="copy_color_code();">
-                    <span id="copy-tooltip" class="tooltip toggle-tooltip"><span class="tooltip-text">Copy color code</span>
+                    <span id="copy-tooltip" class="tooltip toggle-tooltip tooltip-clickable"><span class="tooltip-text">Copy color code</span>
                         ${n_match[1]}
                     </span>
                     <span id="copied" class="tooltip-text">Copied!</span>

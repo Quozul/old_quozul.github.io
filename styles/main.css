@@ -99,6 +99,53 @@ footer a:visited {
     content: "\00a9";
 }
 
+/* Tooltip https://www.w3schools.com/css/css_tooltip.asp */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    transform: scale(0);
+    transform-origin: bottom center;
+    opacity: 0;
+
+    transition: .3s;
+
+    width: 100px;
+
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-size: 12px;
+    
+    position: absolute;
+
+    bottom: 100%;
+    left: 50%;
+    margin-left: -50px /* use half of the width to center the tooltip */
+}
+
+.tooltip .tooltip-text::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.toggle-tooltip:hover > .tooltip-text {
+    transform: scale(1);
+    opacity: 1;
+}
+
 /* Media queries */
 
 /* For dark theme */
@@ -124,6 +171,15 @@ footer a:visited {
     footer {
         background-color: #222;
     }
+
+    .tooltip .tooltip-text {
+        background-color: black;
+        color: white;
+    }
+    
+    .tooltip .tooltip-text::after {
+        border-color: black transparent transparent transparent;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -135,48 +191,9 @@ footer a:visited {
         padding: 20px;
         margin: 20px 0;
     }
-}
 
-/* Tooltip https://www.w3schools.com/css/css_tooltip.asp */
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltip-text {
-    transform: scale(0);
-    transform-origin: bottom center;
-    opacity: 0;
-
-    transition: .3s;
-
-    width: 100px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    font-size: 12px;
-    
-    position: absolute;
-
-    bottom: 100%;
-    left: 50%;
-    margin-left: -50px /* use half of the width to center the tooltip */
-}
-
-.tooltip .tooltip-text::after {
-    content: " ";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: black transparent transparent transparent;
-}
-
-.toggle-tooltip:hover > .tooltip-text {
-    transform: scale(1);
-    opacity: 1;
+    .tooltip-clickable:active > .tooltip-text {
+        transform: scale(.8);
+        opacity: 1;
+    }
 }
