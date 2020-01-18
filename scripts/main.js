@@ -7,6 +7,7 @@ let won = false;
 let clicks = 0;
 let wins = 0;
 let last_color;
+let clicked_colors = [];
 
 const win_sound = new Audio('assets/win.mp3');
 const wrong_sound = new Audio('assets/wrong.mp3');
@@ -75,7 +76,7 @@ function randomize_colors() {
 }
 
 function verify_color() {
-    if (won) return
+    if (won || clicked_colors.includes(this)) return
 
     clicks++;
 
@@ -101,8 +102,11 @@ function verify_color() {
             lc.style.opacity = '1';
             lc.innerHTML =
                 `<b>That was the color:</b>
-                <span id="copy-color" class="tooltip" title="Copy color code" onclick="copy_color_code();">
-                    ${n_match[1]}
+                
+                <span id="copy-color" class="tooltip" onclick="copy_color_code();">
+                    <span id="copy-tooltip" class="tooltip toggle-tooltip"><span class="tooltip-text">Copy color code</span>
+                        ${n_match[1]}
+                    </span>
                     <span id="copied" class="tooltip-text">Copied!</span>
                 </span>`;
         }, 200);
@@ -115,12 +119,19 @@ function verify_color() {
             randomize_colors();
             document.getElementById('difficulty').innerHTML = 255 - dif;
             won = false;
-        }, 1000);
 
+            clicked_colors.forEach((circle) => {
+                circle.style.transform = '';
+            });
+            clicked_colors = [];
+        }, 1000);
     } else {
         text_anim();
         wrong_sound.play();
         g.innerHTML = encouraging[Math.floor(rand(0, encouraging.length))];
+        clicked_colors.push(this);
+        this.style.backgroundColor = '#777';
+        this.style.transform = 'scale(.75)';
     }
 
     document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100);
@@ -185,7 +196,13 @@ function update_gameinfo() {
     dif = cookie.dif || 255;
 
     document.getElementById('difficulty').innerHTML = 255 - dif;
-    document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100) || '??';
+    document.getElementById('win-rate').innerHTML =
+        `<span class="tooltip toggle-tooltip">
+            <span class="tooltip-text">
+                ${wins} / ${clicks} ${clicks > 1 ? 'tries' : 'try'}
+            </span>
+            ${Math.round(wins / clicks * 100) || '??'}%
+        </span>`;
 }
 
 function update_cookie() {
@@ -195,21 +212,42 @@ function update_cookie() {
 function copy_color_code() {
     navigator.clipboard.writeText(last_color).then(function () {
         // display copied tooltip and hides it after 2s
-        let copied = document.getElementById('copied');
-        copied.style.opacity = 1;
-        const copied_timeout = setTimeout(function () { copied.style.opacity = 0; }, 2000);
+        toggle_tooltip(document.getElementById('copied'), document.getElementById('copy-tooltip'));
     }, function (err) {
         console.error('Couldn\'t copy to clipboard: ', err);
     });
 }
 
+function toggle_tooltip(t1, t2 = undefined) {
+    let t2_toogleable = false;
+    if (t2 != undefined)
+        t2_toogleable = t2.classList.contains('toggle-tooltip');
+
+    t1.style.opacity = 1;
+    t1.style.transform = 'scale(1)';
+
+    if (t2_toogleable)
+        t2.classList.remove('toggle-tooltip');
+
+    setTimeout(function () {
+        t1.style.opacity = 0;
+        t1.style.transform = 'scale(0)';
+
+        if (t2_toogleable)
+            t2.classList.add('toggle-tooltip');
+    }, 2000);
+}
+
 // add event listeners
 function init() {
     // on reset
-    document.getElementById('reset').onclick = function () {
+    document.getElementById('reset-arrow').onclick = function () {
         dif = 255;
         clicks = 0;
         wins = 0;
+
+        toggle_tooltip(document.getElementById('reseted'), document.getElementById('reset'));
+
         update_cookie();
         update_gameinfo();
         randomize_colors();
@@ -225,7 +263,7 @@ function init() {
     // press a number between 1-5 to toggle verification
     document.addEventListener('keydown', function (event) {
         if (event.repeat) return;
-        let circle = document.getElementById(event.key);
+        let circle = circles[parseInt(event.key) - 1];
         if (circle != undefined)
             circle.click();
     });
