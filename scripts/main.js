@@ -19,13 +19,8 @@ const win_msg = ['Well done!', 'Good job!', 'So smart!'];
 const encouraging = ['Don\'t give up.', 'Never give up.', 'You can do it.'];
 
 // random in a range
-function rand(l = 0, u = 1) {
-    return Math.random() * u + l;
-}
-
-function rgbToHex(r, g, b) {
-    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-}
+const rand = (l = 0, u = 1) => { return Math.random() * u + l }
+const rgbToHex = (r, g, b) => { return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) }
 
 // random color generator
 function random_color(base, dif) {
@@ -99,7 +94,7 @@ function verify_color() {
         lc.style.opacity = '0'; // create smooth transition
 
         // display last color name according to ntc library
-        setTimeout(function () {
+        setTimeout(() => {
             lc.style.opacity = '1';
             lc.innerHTML =
                 `<b>That was the color:</b>
@@ -116,7 +111,7 @@ function verify_color() {
 
         // wait 1s until the animation ends and randomize colors
         dif = Math.max(dif - 1, 8);
-        win_timer = setTimeout(function () {
+        win_timer = setTimeout(() => {
             randomize_colors();
             document.getElementById('difficulty').innerHTML = 255 - dif;
             won = false;
@@ -139,9 +134,7 @@ function verify_color() {
 
     // resets text after 1s
     if (guess_timer != undefined) clearTimeout(guess_timer);
-    guess_timer = setTimeout(function () {
-        g.innerHTML = 'Guess the color';
-    }, 1000);
+    guess_timer = setTimeout(() => g.innerHTML = 'Guess the color', 1000);
 
     update_cookie();
     update_gameinfo();
@@ -167,18 +160,16 @@ function text_anim() {
         clearTimeout(g_anim);
 
     document.getElementById('guess').style.transform = 'scale(1.1)';
-    g_anim = setTimeout(function () {
-        document.getElementById('guess').style.transform = '';
-    }, 1000);
+    g_anim = setTimeout(() => document.getElementById('guess').style.transform = '', 1000);
 }
 
 function full_anim() {
     for (index in circles)
         if (circles.hasOwnProperty(index)) {
             const element = circles[index];
-            setTimeout(function () {
+            setTimeout(() => {
                 element.style.borderRadius = '16px';
-                setTimeout(function () {
+                setTimeout(() => {
                     element.style.borderRadius = '';
                 }, 200);
             }, index * 200);
@@ -207,22 +198,22 @@ function update_gameinfo() {
 }
 
 function update_cookie() {
-    document.cookie = `${cookie_name}=${JSON.stringify({ dif: dif, clicks: clicks, wins: wins })}`;
+    document.cookie = `${cookie_name}=${JSON.stringify({ dif: dif, clicks: clicks, wins: wins })}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 }
 
 function copy_color_code() {
-    navigator.clipboard.writeText(last_color).then(function () {
+    navigator.clipboard.writeText(last_color).then(() => {
         // display copied tooltip and hides it after 2s
         toggle_tooltip(document.getElementById('copied'), document.getElementById('copy-tooltip'));
-    }, function (err) {
+    }, (err) => {
         console.error('Couldn\'t copy to clipboard: ', err);
     });
 }
 
 function toggle_tooltip(t1, t2 = undefined) {
     let t2_toogleable = false;
-    if (t2 != undefined)
-        t2_toogleable = t2.classList.contains('toggle-tooltip');
+    if (t2 != undefined && t2.classList.contains('toggle-tooltip') || t1.style.opacity != 0)
+        t2_toogleable = true;
 
     t1.style.opacity = 1;
     t1.style.transform = 'scale(1)';
@@ -230,19 +221,21 @@ function toggle_tooltip(t1, t2 = undefined) {
     if (t2_toogleable)
         t2.classList.remove('toggle-tooltip');
 
-    setTimeout(function () {
+    t1.parentNode.onmouseleave = () => {
         t1.style.opacity = 0;
         t1.style.transform = 'scale(0)';
 
-        if (t2_toogleable)
+        console.log(t2_toogleable);
+        if (t2_toogleable) {
             t2.classList.add('toggle-tooltip');
-    }, 2000);
+        }
+    }
 }
 
 // add event listeners
 function init() {
     // on reset
-    document.getElementById('reset-arrow').onclick = function () {
+    document.getElementById('reset-arrow').onclick = () => {
         dif = 255;
         clicks = 0;
         wins = 0;
@@ -262,7 +255,7 @@ function init() {
             circles[index].onclick = verify_color;
 
     // press a number between 1-5 to toggle verification
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', (event) => {
         if (event.repeat) return;
         let circle = circles[parseInt(event.key) - 1];
         if (circle != undefined)
