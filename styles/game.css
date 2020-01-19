@@ -107,3 +107,7 @@
 #copy-color {
     cursor: pointer;
 }
+
+#copy-color h6 {
+    display: inline;
+}

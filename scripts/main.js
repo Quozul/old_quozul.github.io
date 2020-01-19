@@ -93,6 +93,7 @@ function verify_color() {
         // save last color hex code
         last_color = rgbToHex(color[0], color[1], color[2]);
         let n_match = ntc.name(last_color);
+        console.log(n_match);
 
         let lc = document.getElementById('last-color');
         lc.style.opacity = '0'; // create smooth transition
@@ -105,7 +106,7 @@ function verify_color() {
                 
                 <span id="copy-color" class="tooltip" onclick="copy_color_code();">
                     <span id="copy-tooltip" class="tooltip toggle-tooltip tooltip-clickable"><span class="tooltip-text">Copy color code</span>
-                        ${n_match[1]}
+                        ${n_match[1]} ${!n_match[2] ? '<h6>(approx.)</h6>' : ''}
                     </span>
                     <span id="copied" class="tooltip-text">Copied!</span>
                 </span>`;
