@@ -26,35 +26,38 @@
 
         <main class="wrapper">
             <section>
-                <h1 id="guess">Guess the color</h1>
-                <h3 id="last-color">&nbsp;</h3>
-                <div id="info">
-                    <span>rgb<span id="color-code">(<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)</span></span>
-                    <span>
-                        <span id="diff-span">Difficulty: <span id="difficulty">0</span>
-                        </span>
-
-                        <span id="reset" class="tooltip toggle-tooltip tooltip-clickable"><span class="tooltip-text">Reset progress</span>
-                            <span class="tooltip"><span id="reseted" class="tooltip-text">Reseted!</span>
-                                <span id="reset-arrow">↻</span>
-                            </span>
-                        </span>
-
-                        <br>
-                        <span>Win rate: <span id="win-rate">??%</span></span>
-                    </span>
-                </div>
-
                 <noscript>
                     <h3><i>Guess the color game</i> requires JavaScript in order to work.</h3>
+                    <p>Please enable JavaScript in your browser settings to play the game.</p>
                 </noscript>
 
-                <div id="colors">
-                    <span class="color-circle">&nbsp;</span>
-                    <span class="color-circle">&nbsp;</span>
-                    <span class="color-circle">&nbsp;</span>
-                    <span class="color-circle">&nbsp;</span>
-                    <span class="color-circle">&nbsp;</span>
+                <div id="js-enabled" style="display: none">
+                    <h1 id="guess">Guess the color</h1>
+                    <h3 id="last-color">&nbsp;</h3>
+                    <div id="info">
+                        <span>rgb<span id="color-code">(<span class="red">0</span>, <span class="green">0</span>, <span class="blue">0</span>)</span></span>
+                        <span>
+                            <span id="diff-span">Difficulty: <span id="difficulty">0</span>
+                            </span>
+
+                            <span id="reset" class="tooltip toggle-tooltip tooltip-clickable"><span class="tooltip-text">Reset progress</span>
+                                <span class="tooltip"><span id="reseted" class="tooltip-text">Reseted!</span>
+                                    <span id="reset-arrow">↻</span>
+                                </span>
+                            </span>
+
+                            <br>
+                            <span>Win rate: <span id="win-rate">??%</span></span>
+                        </span>
+                    </div>
+
+                    <div id="colors">
+                        <span class="color-circle">&nbsp;</span>
+                        <span class="color-circle">&nbsp;</span>
+                        <span class="color-circle">&nbsp;</span>
+                        <span class="color-circle">&nbsp;</span>
+                        <span class="color-circle">&nbsp;</span>
+                    </div>
                 </div>
             </section>
         </main>
