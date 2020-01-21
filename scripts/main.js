@@ -9,18 +9,31 @@ let wins = 0;
 let last_color;
 let clicked_colors = [];
 
+// $ function from jquery remake
+const $ = s => {
+    let f = s.slice(0, 1);
+    if (f == '#' || f == '.')
+        s = s.slice(1, s.length);
+
+    switch (f) {
+        case '#': return document.getElementById(s);
+        case '.': return document.getElementsByClassName(s);
+        default: return document.getElementsByTagName(s);
+    }
+}
+
 const win_sound = new Audio('assets/win.mp3');
 const wrong_sound = new Audio('assets/wrong.mp3');
 
-const circles = document.getElementsByClassName('color-circle');
+const circles = $('.color-circle');
 const cookie_name = 'gtcgame';
 
 const win_msg = ['Well done!', 'Good job!', 'So smart!'];
 const encouraging = ['Don\'t give up.', 'Never give up.', 'You can do it.'];
 
 // random in a range
-const rand = (l = 0, u = 1) => { return Math.random() * u + l }
-const rgbToHex = (r, g, b) => { return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1) }
+const rand = (l = 0, u = 1) => Math.random() * u + l;
+const rgbToHex = (r, g, b) => "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 
 // random color generator
 function random_color(base, dif) {
@@ -67,15 +80,15 @@ function randomize_colors() {
             }
         }
 
-    document.getElementById('color-code').innerHTML = `(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
+    $('#color-code').innerHTML = `(<span class="red">${color[0]}</span>, <span class="green">${color[1]}</span>, <span class="blue">${color[2]}</span>)`;
 }
 
 function verify_color() {
     if (won || clicked_colors.includes(this)) return
 
     clicks++;
+    const g = $('#guess');
 
-    const g = document.getElementById('guess');
     if (deep_compare(this.style.backgroundColor.slice(4, -1).split(', '), color)) {
         g.innerHTML = win_msg[Math.floor(rand(0, win_msg.length))];
 
@@ -90,21 +103,18 @@ function verify_color() {
         let n_match = ntc.name(last_color);
         console.log(n_match);
 
-        let lc = document.getElementById('last-color');
-        lc.style.opacity = '0'; // create smooth transition
+        let lc = $('#last-color');
+        lc.style.opacity = '0'; // create smooth transition between color names
 
         // display last color name according to ntc library
         setTimeout(() => {
             lc.style.opacity = '1';
             lc.innerHTML =
                 `<b>That was the color:</b>
-                
                 <span id="copy-color" class="tooltip" onclick="copy_color_code();">
                     <span id="copy-tooltip" class="tooltip toggle-tooltip tooltip-clickable"><span class="tooltip-text">Copy color code</span>
                         ${n_match[1]} ${!n_match[2] ? '<h6>(approx.)</h6>' : ''}
-                    </span>
-                    <span id="copied" class="tooltip-text">Copied!</span>
-                </span>`;
+                </span><span id="copied" class="tooltip-text">Copied!</span></span>`;
         }, 200);
 
         if (win_timer != undefined) clearTimeout(win_timer);
@@ -113,12 +123,10 @@ function verify_color() {
         dif = Math.max(dif - 1, 8);
         win_timer = setTimeout(() => {
             randomize_colors();
-            document.getElementById('difficulty').innerHTML = 255 - dif;
+            $('#difficulty').innerHTML = 255 - dif;
             won = false;
 
-            clicked_colors.forEach((circle) => {
-                circle.style.transform = '';
-            });
+            clicked_colors.forEach((circle) => circle.style.transform = '');
             clicked_colors = [];
         }, 1000);
     } else {
@@ -130,7 +138,7 @@ function verify_color() {
         this.style.transform = 'scale(.75)';
     }
 
-    document.getElementById('win-rate').innerHTML = Math.round(wins / clicks * 100);
+    $('#win-rate').innerHTML = Math.round(wins / clicks * 100);
 
     // resets text after 1s
     if (guess_timer != undefined) clearTimeout(guess_timer);
@@ -159,8 +167,8 @@ function text_anim() {
     if (g_anim != undefined)
         clearTimeout(g_anim);
 
-    document.getElementById('guess').style.transform = 'scale(1.1)';
-    g_anim = setTimeout(() => document.getElementById('guess').style.transform = '', 1000);
+    $('#guess').style.transform = 'scale(1.1)';
+    g_anim = setTimeout(() => $('#guess').style.transform = '', 1000);
 }
 
 function full_anim() {
@@ -169,9 +177,7 @@ function full_anim() {
             const element = circles[index];
             setTimeout(() => {
                 element.style.borderRadius = '16px';
-                setTimeout(() => {
-                    element.style.borderRadius = '';
-                }, 200);
+                setTimeout(() => element.style.borderRadius = '', 200);
             }, index * 200);
         }
 
@@ -187,14 +193,11 @@ function update_gameinfo() {
     clicks = cookie.clicks || 0;
     dif = cookie.dif || 255;
 
-    document.getElementById('difficulty').innerHTML = 255 - dif;
-    document.getElementById('win-rate').innerHTML =
+    $('#difficulty').innerHTML = 255 - dif;
+    $('#win-rate').innerHTML =
         `<span class="tooltip toggle-tooltip">
-            <span class="tooltip-text">
-                ${wins} / ${clicks} ${clicks > 1 ? 'tries' : 'try'}
-            </span>
-            ${Math.round(wins / clicks * 100) || '??'}%
-        </span>`;
+            <span class="tooltip-text">${wins} / ${clicks} ${clicks > 1 ? 'tries' : 'try'}</span>
+        ${Math.round(wins / clicks * 100) || '??'}%</span>`;
 }
 
 function update_cookie() {
@@ -202,12 +205,11 @@ function update_cookie() {
 }
 
 function copy_color_code() {
-    navigator.clipboard.writeText(last_color).then(() => {
+    navigator.clipboard.writeText(last_color).then(() =>
         // display copied tooltip and hides it after 2s
-        toggle_tooltip(document.getElementById('copied'), document.getElementById('copy-tooltip'));
-    }, (err) => {
-        console.error('Couldn\'t copy to clipboard: ', err);
-    });
+        toggle_tooltip($('#copied'), $('#copy-tooltip')), (err) =>
+        console.error('Couldn\'t copy to clipboard: ', err)
+    );
 }
 
 function toggle_tooltip(t1, t2 = undefined) {
@@ -235,12 +237,15 @@ function toggle_tooltip(t1, t2 = undefined) {
 // add event listeners
 function init() {
     // on reset
-    document.getElementById('reset-arrow').onclick = () => {
+    $('#reset-arrow').onclick = () => {
         dif = 255;
         clicks = 0;
         wins = 0;
 
-        toggle_tooltip(document.getElementById('reseted'), document.getElementById('reset'));
+        toggle_tooltip($('#reseted'), $('#reset'));
+
+        clicked_colors.forEach((circle) => circle.style.transform = '');
+        clicked_colors = [];
 
         update_cookie();
         update_gameinfo();
@@ -249,7 +254,7 @@ function init() {
 
     // click on the circle to toggle verification
     document.body.onload = randomize_colors;
-    document.getElementById('difficulty').innerHTML = 255 - dif;
+    $('#difficulty').innerHTML = 255 - dif;
     for (index in circles)
         if (circles.hasOwnProperty(index))
             circles[index].onclick = verify_color;
@@ -261,6 +266,8 @@ function init() {
         if (circle != undefined)
             circle.click();
     });
+
+    $('#js-enabled').style.display = 'block';
 
     update_gameinfo();
 }
